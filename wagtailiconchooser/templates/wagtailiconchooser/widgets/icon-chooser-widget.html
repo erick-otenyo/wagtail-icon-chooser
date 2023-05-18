@@ -1,0 +1,27 @@
+{% load wagtailadmin_tags %}
+
+<div class="icon-chooser-widget">
+    <div class="icon-selector">
+<!--        {% include "django/forms/widgets/text.html" %}-->
+        <input type="hidden" name="{{ widget.name }}" {% if widget.value != None %}
+               value="{{ widget.value|stringformat:'s' }}" {% endif %} id="{{ widget.attrs.id }}">
+        <div style="display: flex;align-items: center">
+            <button type="button" id="{{widget.attrs.id}}-modal-trigger" class="icon-button button button-secondary">
+                <span id="{{widget.attrs.id}}-icon-container" class="icon-container">
+                    {% if widget.value %}
+                    <svg class="icon selected-icon" aria-hidden="true">
+                        <use href="#icon-{{ widget.value }}"></use>
+                    </svg>
+                    {% endif %}
+                </span>
+                <span class="icon-select-message">
+                    Click to choose icon
+                </span>
+            </button>
+            <button class="button button-small no" id="{{widget.attrs.id}}-icon-choice-clear" type="button"
+                    style="{% if not widget.value %}display:none;{% endif %} ">
+                <span>Clear choice</span>
+            </button>
+        </div>
+    </div>
+</div>

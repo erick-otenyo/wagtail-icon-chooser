@@ -1,0 +1,6 @@
+include README.md
+recursive-include wagtailiconchooser *.html
+recursive-include wagtailiconchooser *.py
+recursive-include wagtailiconchooser *.py
+recursive-include wagtailiconchooser/static *
+recursive-include wagtailiconchooser/templates *
