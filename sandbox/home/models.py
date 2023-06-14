@@ -4,10 +4,11 @@ from wagtail.fields import StreamField
 from wagtail.models import Page
 
 from wagtailiconchooser.blocks import IconChooserBlock
+from wagtailiconchooser.models import CustomIconPage
 from wagtailiconchooser.widgets import IconChooserWidget
 
 
-class HomePage(Page):
+class HomePage(CustomIconPage, Page):
     icon = models.CharField(max_length=100, null=True, blank=True)
     stream_field_with_icon = StreamField([
         ('icon', IconChooserBlock()),
