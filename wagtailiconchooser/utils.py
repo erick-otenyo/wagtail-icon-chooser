@@ -2,6 +2,7 @@ import itertools
 from xml.dom import minidom
 
 from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from wagtail import hooks
 
 _svg_icons = {}
@@ -20,10 +21,25 @@ def get_svg_icons():
             svg = doc.getElementsByTagName("svg")
             if svg:
                 svg = svg[0]
-                svg_id = svg.getAttribute("id")
-                if svg_id:
-                    if svg_id.startswith("icon-"):
-                        svg_id = svg_id.replace("icon-", "")
-                    _svg_icons[svg_id] = svg_str
-
+                icon_id = svg.getAttribute("id")
+                if icon_id:
+                    if icon_id.startswith("icon-"):
+                        icon_id = icon_id.replace("icon-", "")
+                    _svg_icons[icon_id] = svg_str
+            else:
+                symbol = doc.getElementsByTagName("symbol")
+                if symbol:
+                    symbol = symbol[0]
+                    icon_id = symbol.getAttribute("id")
+                    if icon_id:
+                        if icon_id.startswith("icon-"):
+                            icon_id = icon_id.replace("icon-", "")
+                            svg_str = symbol.toxml().replace("symbol", "svg")
+                            doc = minidom.parseString(svg_str)
+                            svg = doc.getElementsByTagName("svg")
+                            if svg:
+                                svg = svg[0]
+                                svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+                                svg.setAttribute("id", icon_id)
+                                _svg_icons[icon_id] = mark_safe(svg.toxml())
     return _svg_icons
