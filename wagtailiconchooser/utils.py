@@ -32,17 +32,17 @@ def get_svg_icons():
                     symbol = doc.getElementsByTagName("symbol")
                     if symbol:
                         symbol = symbol[0]
-                        icon_id = symbol.getAttribute("id")
-                        if icon_id:
-                            if icon_id.startswith("icon-"):
-                                icon_id = icon_id.replace("icon-", "")
+                        symbol_icon_id = symbol.getAttribute("id")
+                        if symbol_icon_id:
+                            if symbol_icon_id.startswith("icon-"):
+                                icon_id = symbol_icon_id.replace("icon-", "")
                                 svg_str = symbol.toxml().replace("symbol", "svg")
                                 doc = minidom.parseString(svg_str)
                                 svg = doc.getElementsByTagName("svg")
                                 if svg:
                                     svg = svg[0]
                                     svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-                                    svg.setAttribute("id", icon_id)
+                                    svg.setAttribute("id", symbol_icon_id)
                                     _svg_icons[icon_id] = mark_safe(svg.toxml())
             except Exception:
                 pass
