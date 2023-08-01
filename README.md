@@ -153,3 +153,40 @@ Just replace `{% icon name=page.icon %}` with
 `NOTE` This approach will load all the icons added to Wagtail (using the `register_icons` hook) to your template. If you
 have registered many SVG icons, this might increase your page's loading bandwidth and might not be efficient since you
 might not use all the icons.
+
+If you have a list of icons that are known, you can create a svg sprite containing only those icons, by using the
+function `get_svg_sprite_for_icons`. This can be used in a view. For example:
+
+```python
+from django.shortcuts import render
+from wagtailiconchooser.utils import get_svg_sprite_for_icons
+
+
+def my_view(request):
+    icons = ["some-icon", "some-other-icon", ...]
+    svg_sprite = get_svg_sprite_for_icons(icons)
+
+    context = {
+        "svg_sprite": svg_sprite
+    }
+
+    return render(request, "template.html", context=context)
+```
+
+In your `template.html` you will have access to the `svg_sprite` context, and you can render and use as below:
+
+```html
+
+<div>
+    {{ svg_sprite|safe }}
+</div>
+
+<svg class="icon">
+    <use href="#icon-some-icon"></use>
+</svg>
+
+<svg class="icon">
+    <use href="#icon-some-other-icon"></use>
+</svg>
+
+```

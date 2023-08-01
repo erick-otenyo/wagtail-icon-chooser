@@ -48,3 +48,19 @@ def get_svg_icons():
                 pass
 
     return _svg_icons
+
+
+def get_svg_sprite_for_icons(icons_list):
+    svg_icons = get_svg_icons()
+    combined_icon_markup = ""
+    for icon in icons_list:
+        svg_str = svg_icons.get(icon)
+        if svg_str:
+            combined_icon_markup += (
+                svg_str.replace('xmlns="http://www.w3.org/2000/svg"', "").replace("svg", "symbol")
+            )
+    _icons_html = render_to_string(
+        "wagtailadmin/shared/icons.html", {"icons": combined_icon_markup}
+    )
+
+    return _icons_html
