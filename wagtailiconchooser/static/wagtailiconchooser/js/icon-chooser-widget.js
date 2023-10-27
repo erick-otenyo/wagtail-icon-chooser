@@ -101,15 +101,17 @@ IconChooserWidget.prototype.createIconOptions = function () {
     const $svgDefs = $('div[data-sprite] svg defs symbol')
     $svgDefs.each(function () {
             let iconId = $(this).attr("id")
-            const parts = iconId.split("-")
-            if (parts[0] === "icon") {
-                iconId = parts.slice(1).join("-")
+            if (iconId) {
+                const parts = iconId.split("-")
+                if (parts && !!parts.length && parts[0] === "icon") {
+                    iconId = parts.slice(1).join("-")
+                }
+                const $container = $("<div class='svg-container'>")
+                $container.on("click", () => that.onIconSelect(iconId))
+                $(`<svg class="icon icon-option" aria-hidden="true"><use href="#icon-${iconId}"></use></svg>`).appendTo($container)
+                $(`<div class="icon-label">${iconId}</div>`).appendTo($container)
+                $container.appendTo(that.modalIconsContent)
             }
-            const $container = $("<div class='svg-container'>")
-            $container.on("click", () => that.onIconSelect(iconId))
-            $(`<svg class="icon icon-option" aria-hidden="true"><use href="#icon-${iconId}"></use></svg>`).appendTo($container)
-            $(`<div class="icon-label">${iconId}</div>`).appendTo($container)
-            $container.appendTo(that.modalIconsContent)
         }
     )
 
