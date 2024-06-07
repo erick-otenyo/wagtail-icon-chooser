@@ -23,7 +23,7 @@ def svg_icon(name=None, classname=None):
     """
 
     if not name:
-        raise ValueError("You must supply an icon name")
+        return None
 
     svg_icons = get_svg_icons()
 
