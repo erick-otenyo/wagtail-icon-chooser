@@ -2,14 +2,14 @@
 
 <div class="icon-chooser-widget">
     <div class="icon-selector">
-        <input type="hidden" name="{{ widget.name }}" {% if widget.value !=None %}
+        <input type="hidden" name="{{ widget.name }}" {% if widget.value != None %}
                value="{{ widget.value|stringformat:'s' }}" {% endif %}
                id="{{ widget.attrs.id }}" {% include "django/forms/widgets/attrs.html" %}>
         <div style="display: flex;align-items: center">
-            <button type="button" id="{{widget.attrs.id}}-modal-trigger" class="icon-button button button-secondary">
-                <span id="{{widget.attrs.id}}-icon-container" class="icon-container">
+            <button type="button" id="{{ widget.attrs.id }}-modal-trigger" class="icon-button button button-secondary">
+                <span id="{{ widget.attrs.id }}-icon-container" class="icon-container">
                     {% if widget.value %}
-                    <svg class="icon selected-icon" aria-hidden="true">
+                        <svg class="icon selected-icon" aria-hidden="true">
                         <use href="#icon-{{ widget.value }}"></use>
                     </svg>
                     {% endif %}
@@ -20,7 +20,7 @@
             </button>
             <button
                     class="button button-small no"
-                    id="{{widget.attrs.id}}-icon-choice-clear"
+                    id="{{ widget.attrs.id }}-icon-choice-clear"
                     type="button"
                     style="{% if not widget.value %}display:none;{% endif %} ">
                 <span>
