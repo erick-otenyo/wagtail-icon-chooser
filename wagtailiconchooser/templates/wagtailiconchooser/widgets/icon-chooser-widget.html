@@ -1,10 +1,10 @@
-{% load wagtailadmin_tags %}
+{% load wagtailadmin_tags i18n %}
 
 <div class="icon-chooser-widget">
     <div class="icon-selector">
-<!--        {% include "django/forms/widgets/text.html" %}-->
-        <input type="hidden" name="{{ widget.name }}" {% if widget.value != None %}
-               value="{{ widget.value|stringformat:'s' }}" {% endif %} id="{{ widget.attrs.id }}">
+        <input type="hidden" name="{{ widget.name }}" {% if widget.value !=None %}
+               value="{{ widget.value|stringformat:'s' }}" {% endif %}
+               id="{{ widget.attrs.id }}" {% include "django/forms/widgets/attrs.html" %}>
         <div style="display: flex;align-items: center">
             <button type="button" id="{{widget.attrs.id}}-modal-trigger" class="icon-button button button-secondary">
                 <span id="{{widget.attrs.id}}-icon-container" class="icon-container">
@@ -15,12 +15,17 @@
                     {% endif %}
                 </span>
                 <span class="icon-select-message">
-                    Click to choose icon
+                    {% translate "Click to choose icon" %}
                 </span>
             </button>
-            <button class="button button-small no" id="{{widget.attrs.id}}-icon-choice-clear" type="button"
+            <button
+                    class="button button-small no"
+                    id="{{widget.attrs.id}}-icon-choice-clear"
+                    type="button"
                     style="{% if not widget.value %}display:none;{% endif %} ">
-                <span>Clear choice</span>
+                <span>
+                    {% translate "Clear choice" %}
+                </span>
             </button>
         </div>
     </div>
