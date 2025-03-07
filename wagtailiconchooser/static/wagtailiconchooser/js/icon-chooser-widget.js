@@ -7,7 +7,7 @@ function IconChooserWidget(id) {
     this.initialRender = true
 
     this.modalTrigger = $("#" + id + "-modal-trigger")
-    this.modalTrigger.on("click", () => {
+    this.modalTrigger.off("click").on("click", () => {
         this.createIconOptions()
         if (this.modalContainer) {
             this.modalContainer.modal("show")
@@ -107,10 +107,11 @@ IconChooserWidget.prototype.createIconOptions = function () {
                     iconId = parts.slice(1).join("-")
                 }
                 const $container = $("<div class='svg-container'>")
-                $container.on("click", () => that.onIconSelect(iconId))
                 $(`<svg class="icon icon-option" aria-hidden="true"><use href="#icon-${iconId}"></use></svg>`).appendTo($container)
                 $(`<div class="icon-label">${iconId}</div>`).appendTo($container)
                 $container.appendTo(that.modalIconsContent)
+
+                $container.on("click", () => that.onIconSelect(iconId))
             }
         }
     )
