@@ -1,5 +1,3 @@
-import json
-
 from django.forms import widgets, Media
 from wagtail.admin.telepath import register
 from wagtail.admin.telepath.widgets import WidgetAdapter
