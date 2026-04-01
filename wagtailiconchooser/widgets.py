@@ -1,8 +1,8 @@
 import json
 
 from django.forms import widgets, Media
-from wagtail.telepath import register
-from wagtail.widget_adapters import WidgetAdapter
+from wagtail.admin.telepath import register
+from wagtail.admin.telepath.widgets import WidgetAdapter
 
 
 class IconChooserWidget(widgets.TextInput):
