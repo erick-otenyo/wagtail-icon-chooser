@@ -1,7 +1,12 @@
 from django.forms import widgets, Media
-from wagtail.admin.telepath import register
-from wagtail.admin.telepath.widgets import WidgetAdapter
+from wagtail import VERSION
 
+if VERSION < (7, 1):
+    from wagtail.telepath import register
+    from wagtail.widget_adapters import WidgetAdapter
+else:
+    from wagtail.admin.telepath import register
+    from wagtail.admin.widgets import WidgetAdapter
 
 class IconChooserWidget(widgets.TextInput):
     template_name = "wagtailiconchooser/widgets/icon-chooser-widget.html"
@@ -38,7 +43,7 @@ class IconChooserWidget(widgets.TextInput):
 
 class IconChooserWidgetAdapter(WidgetAdapter):
     js_constructor = "wagtailiconchooser.widgets.IconChooser"
-    
+
     class Media:
         js = [
             "wagtailiconchooser/js/icon-chooser-widget-telepath.js",
