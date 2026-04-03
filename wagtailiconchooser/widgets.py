@@ -1,7 +1,7 @@
 from django.forms import widgets, Media
 from wagtail import VERSION
 
-if VERSION < (7, 0):
+if VERSION < (7, 1):
     from wagtail.telepath import register
     from wagtail.widget_adapters import WidgetAdapter
 else:
