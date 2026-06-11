@@ -155,8 +155,3 @@ IconChooserWidget.prototype.handleSelectedIconClear = function () {
     // hide clear button
     this.iconClear.hide()
 }
-
-
-
-
-
