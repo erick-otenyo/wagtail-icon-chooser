@@ -140,7 +140,7 @@ IconChooserWidget.prototype.createIconSvgEl = function (iconId) {
 
 
 IconChooserWidget.prototype.handleIconListFilter = function (e) {
-    const value = e.target.value
+    const value = e.target.value.toLowerCase()
     this.modalIconsContent.find("div").filter(function () {
         $(this).toggle($(this).text().toLowerCase().indexOf(value.toLowerCase()) > -1)
     });
