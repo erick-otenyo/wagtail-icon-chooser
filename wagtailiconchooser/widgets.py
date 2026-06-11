@@ -1,3 +1,5 @@
+import json
+
 from django.forms import widgets, Media
 from wagtail import VERSION
 
@@ -11,18 +13,20 @@ else:
 class IconChooserWidget(widgets.TextInput):
     template_name = "wagtailiconchooser/widgets/icon-chooser-widget.html"
     
-    def __init__(self, attrs=None):
+    def __init__(self, attrs=None, icons=None):
+        self.icons = icons or []
         default_attrs = {
             "class": "icon-chooser-widget__icon-input",
         }
         attrs = attrs or {}
         attrs = {**default_attrs, **attrs}
         super().__init__(attrs=attrs)
-    
+
     def build_attrs(self, *args, **kwargs):
         attrs = super().build_attrs(*args, **kwargs)
         attrs['data-controller'] = 'icon-chooser-widget'
-        
+        if self.icons:
+            attrs['data-icons'] = json.dumps(self.icons)
         return attrs
     
     @property

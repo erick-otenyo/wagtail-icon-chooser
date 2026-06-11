@@ -45,6 +45,26 @@ class MyPage(Page):
     ]
 ```
 
+# Limiting available icons
+
+You can restrict which icons are shown in the chooser modal by passing an `icons` allowlist.
+
+**In a FieldPanel:**
+
+```python
+FieldPanel("icon", widget=IconChooserWidget(icons=["cross", "tick", "home"]))
+```
+
+**In a StreamField block:**
+
+```python
+stream_field_with_icon = StreamField([
+    ('icon', IconChooserBlock(icons=["cross", "tick", "home"])),
+], use_json_field=True, blank=True, null=True)
+```
+
+Only the icons named in the list will appear in the modal. Omitting `icons` (or passing `None`) shows all available icons.
+
 # Screenshots
 
 - Icon Chooser Widgets for Page field and Stream field

@@ -16,6 +16,9 @@ function IconChooserWidget(id) {
 
     this.iconClear = $("#" + id + "-icon-choice-clear")
     this.iconClear.on("click", this.handleSelectedIconClear.bind(this))
+
+    const iconsAttr = this.iconInput.attr('data-icons')
+    this.allowedIcons = iconsAttr ? new Set(JSON.parse(iconsAttr)) : null
 }
 
 
@@ -105,6 +108,9 @@ IconChooserWidget.prototype.createIconOptions = function () {
                 const parts = iconId.split("-")
                 if (parts && !!parts.length && parts[0] === "icon") {
                     iconId = parts.slice(1).join("-")
+                }
+                if (that.allowedIcons && !that.allowedIcons.has(iconId)) {
+                    return
                 }
                 const $container = $("<div class='svg-container'>")
                 $(`<svg class="icon icon-option" aria-hidden="true"><use href="#icon-${iconId}"></use></svg>`).appendTo($container)
