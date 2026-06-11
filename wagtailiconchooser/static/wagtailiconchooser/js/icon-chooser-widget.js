@@ -160,4 +160,3 @@ IconChooserWidget.prototype.handleSelectedIconClear = function () {
 
 
 
-
